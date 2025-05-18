@@ -1,4 +1,4 @@
-# DMA Controller — Specification
+# DMA Controller Specification
 
 ## Overview
 

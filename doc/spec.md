@@ -114,6 +114,10 @@ This module implements an AXI4 DMA (Direct Memory Access) controller with an AXI
 | `irq`  | Output    | Interrupt on completion   |
 
 ---
+## Top Diagram
+![DMA Diagram](diagrams/DMA Project Top Diagram.drawio.png)
+
+---
 
 ## Register Map (AXI4-Lite)
 

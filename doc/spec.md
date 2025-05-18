@@ -115,7 +115,7 @@ This module implements an AXI4 DMA (Direct Memory Access) controller with an AXI
 
 ---
 ## Top Diagram
-![DMA Diagram](diagrams/DMA Project Top Diagram.drawio.png)
+![DMA Diagram](doc/diagrams/DMA Project Top Diagram.drawio.png)
 
 ---
 

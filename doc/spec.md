@@ -115,7 +115,7 @@ This module implements an AXI4 DMA (Direct Memory Access) controller with an AXI
 
 ---
 ## Top Diagram
-![DMA Diagram](doc/diagrams/DMA Project Top Diagram.drawio.png)
+![DMA Diagram](https://github.com/Axyom/DMA-UVM-Project/blob/main/doc/diagrams/DMA%20Project%20Top%20Diagram.drawio.png?raw=true)
 
 ---
 

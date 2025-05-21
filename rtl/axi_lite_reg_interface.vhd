@@ -5,7 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity axi_lite_reg_interface is
     generic (
         REG_WIDTH : integer := 32;
-        REG_COUNT : integer := 4
+        WRITE_REG_COUNT : integer := 4;
+        READ_REG_COUNT: integer := 2
     );
     port (
         -- Clock and Reset
@@ -26,6 +27,7 @@ entity axi_lite_reg_interface is
         -- Write Response Channel
         BVALID   : out std_logic;
         BREADY   : in  std_logic;
+        BRESP    : out std_logic_vector(1 downto 0);
 
         -- Read Address Channel
         ARADDR   : in  std_logic_vector(31 downto 0);
@@ -35,132 +37,108 @@ entity axi_lite_reg_interface is
         -- Read Data Channel
         RDATA    : out std_logic_vector(REG_WIDTH-1 downto 0);
         RVALID   : out std_logic;
-        RREADY   : in  std_logic
+        RREADY   : in  std_logic;
+        RRESP    : out std_logic_vector(1 downto 0);
+        
+        -- Signals sent and received to and from the DMA engine
+        start : out std_logic;
+        irq_enable : out std_logic;
+        busy : in std_logic;
+        done : in std_logic;
+        src_addr : out std_logic_vector(REG_WIDTH-1 downto 0);
+        dst_addr : out std_logic_vector(REG_WIDTH-1 downto 0);
+        length : out std_logic_vector(REG_WIDTH-1 downto 0)
     );
 end entity;
 
 architecture RTL of axi_lite_reg_interface is
 
-    type state_t is (IDLE, WRITE_ADDR, WRITE_DATA, WRITE_RESP, READ_ADDR, READ_DATA);
-    signal state_reg, state_next : state_t;
-
-    signal reg_file : array(0 to REG_COUNT-1) of std_logic_vector(REG_WIDTH-1 downto 0);
-    signal addr_idx_reg, addr_idx_next : integer range 0 to REG_COUNT-1;
-    signal rdata_reg, rdata_next : std_logic_vector(REG_WIDTH-1 downto 0);
-
-    signal awready_i, wready_i, bvalid_i, arready_i, rvalid_i : std_logic;
-    signal rdata_i : std_logic_vector(REG_WIDTH-1 downto 0);
+    type state_t is (IDLE, WRITE_DATA, WRITE_RESP, READ_DATA);
+    type reg_array_t is array(0 to READ_REG_COUNT + WRITE_REG_COUNT-1) of std_logic_vector(REG_WIDTH-1 downto 0);
+    
+    signal state, state_next : state_t;
+    signal reg_space, reg_space_next : reg_array_t;
+    signal address_reg, address_next : unsigned(REG_WIDTH-1 downto 0);
 
 begin
-    -- Register mappings
-    start            <= reg_file(0)(0);       -- CONTROL bit 0 : START
-    irq_enable       <= reg_file(0)(1);       -- CONTROL bit 1 : IRQ_ENABLE
-    reg_file(1)(0)   <= busy;                 -- STATUS bit 0 : BUSY
-    reg_file(1)(1)   <= done;                 -- STATUS bit 1 : DONE
-    src_addr         <= reg_file(2);          -- SRC_ADDR full 32 bits
-    dst_addr         <= reg_file(3);          -- DST_ADDR full 32 bits
-    length           <= reg_file(4);          -- LENGTH full 32 bits
 
-    -- Output assignments
-    AWREADY <= awready_i;
-    WREADY  <= wready_i;
-    BVALID  <= bvalid_i;
-    ARREADY <= arready_i;
-    RVALID  <= rvalid_i;
-    RDATA   <= rdata_reg;
-
-    -- Sequential process: registers
-    process (ACLK)
+    fsm_reg : process(ACLK, ARESETn)
     begin
-        if rising_edge(ACLK) then
-            if ARESETn = '0' then
-                state_reg     <= IDLE;
-                addr_idx_reg  <= 0;
-                rdata_reg     <= (others => '0');
-            else
-                state_reg     <= state_next;
-                addr_idx_reg  <= addr_idx_next;
-                rdata_reg     <= rdata_next;
-            end if;
+        if ARESETn = '0' then
+            state <= IDLE;
+            reg_space <= (others => (others => '0'));
+            address_reg <= (others => '0');
+        elsif rising_edge(ACLK) then
+            state <= state_next;
+            reg_space <= reg_space_next;
+            address_reg <= address_next;
         end if;
     end process;
-
-    -- Combinatorial process: next state and outputs
-    process (state_reg, AWVALID, AWADDR, WVALID, WDATA, WSTRB, BREADY,
-             ARVALID, ARADDR, RREADY, reg_file, addr_idx_reg)
-        variable reg_tmp : std_logic_vector(REG_WIDTH-1 downto 0);
-        variable reg_file_next : array(0 to REG_COUNT-1) of std_logic_vector(REG_WIDTH-1 downto 0) := reg_file;
-        variable idx : integer;
+    
+    fsm_comb : process(all)
     begin
-        -- Default values
-        state_next   <= state_reg;
-        addr_idx_next <= addr_idx_reg;
-        rdata_next   <= rdata_reg;
-
-        awready_i <= '0';
-        wready_i  <= '0';
-        bvalid_i  <= '0';
-        arready_i <= '0';
-        rvalid_i  <= '0';
-
-        case state_reg is
-
-            when IDLE =>
-                if AWVALID = '1' then
-                    awready_i <= '1';
-                    idx := to_integer(unsigned(AWADDR(3 + integer(log2(real(REG_COUNT))) - 1 downto 2)));
-                    addr_idx_next <= idx;
-                    state_next <= WRITE_ADDR;
-                elsif ARVALID = '1' then
-                    arready_i <= '1';
-                    idx := to_integer(unsigned(ARADDR(3 + integer(log2(real(REG_COUNT))) - 1 downto 2)));
-                    addr_idx_next <= idx;
-                    state_next <= READ_ADDR;
-                end if;
-
-            when WRITE_ADDR =>
-                awready_i <= '0';
-                wready_i <= '1';
-                if WVALID = '1' then
-                    for i in 0 to (REG_WIDTH/8 - 1) loop
-                        if WSTRB(i) = '1' then
-                            reg_tmp := reg_file(addr_idx_reg);
-                            reg_tmp(8*i+7 downto 8*i) := WDATA(8*i+7 downto 8*i);
-                            reg_file_next(addr_idx_reg) := reg_tmp;
-                        end if;
-                    end loop;
+        -- defaults
+        state_next <= state;
+        AWREADY <= '0';
+        WREADY <= '0';
+        BVALID <= '0';
+        ARREADY <= '0';
+        RVALID <= '0';
+        BRESP <= "00";
+        RRESP <= "00";
+    
+        case state is
+            when IDLE => 
+                if AWVALID = '1' then -- priority for write, abritrary decision
                     state_next <= WRITE_DATA;
+                    AWREADY <= '1';  
+                    address_next <= unsigned(AWADDR);
+                elsif ARVALID = '1' then
+                    state_next <= READ_DATA;
+                    ARREADY <= '1'; 
+                    address_next <= unsigned(ARADDR);
                 end if;
-
-            when WRITE_DATA =>
-                wready_i <= '0';
-                bvalid_i <= '1';
+                
+            when WRITE_DATA =>            
+                if WVALID = '1' then
+                    wready <= '1'; 
+                    
+                    if to_integer(address_reg) < WRITE_REG_COUNT then -- make sure address is writable    
+                        for i in 0 to REG_WIDTH/8 - 1 loop
+                            if WSTRB(i) = '1' then
+                                reg_space_next(to_integer(address_reg))(8*i+7 downto 8*i) <= WDATA(8*i+7 downto 8*i);
+                            end if;
+                        end loop;    
+                    end if; 
+                    
+                    state_next <= WRITE_RESP;               
+                    
+                end if;
+            when WRITE_RESP =>
+                BVALID <= '1';
+                if not (to_integer(address_reg) < WRITE_REG_COUNT) then
+                    BRESP <= "11"; -- index error
+                end if;
+                
                 if BREADY = '1' then
                     state_next <= IDLE;
                 end if;
-
-            when READ_ADDR =>
-                arready_i <= '0';
-                rdata_next <= reg_file(addr_idx_reg);
-                rvalid_i <= '1';
-                state_next <= READ_DATA;
-
+                
             when READ_DATA =>
-                rvalid_i <= '1';
+                
+                if to_integer(address_reg) > WRITE_REG_COUNT and to_integer(address_reg) < WRITE_REG_COUNT + READ_REG_COUNT then
+                    RDATA <= reg_space(to_integer(address_reg));
+                else -- index error
+                    RRESP <= "11";
+                end if;
+            
                 if RREADY = '1' then
-                    rvalid_i <= '0';
                     state_next <= IDLE;
                 end if;
-
-            when WRITE_RESP =>
-                null;
-
+            when others =>
+                state_next <= IDLE;
         end case;
-
-        -- Update register file
-        for i in 0 to REG_COUNT-1 loop -- TODO do not update done and busy TODO change register map to include first the writable ones then read only ones
-            reg_file(i) <= reg_file_next(i);
-        end loop;
+            
     end process;
 
 end architecture;

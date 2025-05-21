@@ -1,0 +1,9 @@
+# compile vhdl design source files
+vhdl2008 xil_defaultlib  \
+"../../../../../rtl/axi_lite_reg_interface.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../../rtl/dma_controller.vhd" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,9 @@
+0.7
+2020.2
+Nov  8 2024
+22:36:57
+C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd,1747798236,vhdl2008,C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/tb/axi_lite_reg_interface_tb.vhd,,,axi_lite_reg_interface,,,,,,,,
+C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/dma_controller.vhd,1747701728,vhdl,,,,,,,,,,,,
+C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/tb/axi_lite_reg_interface_tb.sv,1747800041,systemVerilog,,,,axi_lite_if;tb_axi_lite_reg_interface,,uvm,,,,,,
+C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/tb/axi_lite_reg_interface_tb.vhd,1747799136,vhdl,,,,axi_lite_reg_interface_tb,,,,,,,,
+C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/DMA_project.sim/sim_1/behav/xsim/glbl.v,1724786425,verilog,,,,glbl,,uvm,,,,,,

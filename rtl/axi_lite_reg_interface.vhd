@@ -94,9 +94,9 @@ begin
         RVALID <= '0';
         BRESP <= "00";
         RRESP <= "00";
-        reg_space_next(WRITE_REG_COUNT-1 downto 0) <= reg_space(WRITE_REG_COUNT-1 downto 0);
+        reg_space_next(0 to WRITE_REG_COUNT-1) <= reg_space(0 to WRITE_REG_COUNT-1);
         reg_space_next(0)(0) <= '0'; -- start bit automatically goes to 0
-        reg_space_next(WRITE_REG_COUNT + READ_REG_COUNT - 1 downto WRITE_REG_COUNT) <= (others => (others => '0')); -- default read regs to 0
+        reg_space_next(WRITE_REG_COUNT to WRITE_REG_COUNT + READ_REG_COUNT - 1) <= (others => (others => '0')); -- default read regs to 0
         reg_space_next(WRITE_REG_COUNT)(1 downto 0) <= done & busy; -- except those ones (buffered)
     
         case state is

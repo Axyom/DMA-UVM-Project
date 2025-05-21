@@ -121,13 +121,15 @@ This module implements an AXI4 DMA (Direct Memory Access) controller with an AXI
 
 ## Register Map (AXI4-Lite)
 
+We put first the writable addresses, then de readable ones to simplify design.
+
 | Address | Name      | R/W | Description                               |
 |---------|-----------|-----|-------------------------------------------|
 | 0x00    | CONTROL   | R/W | Bit 0: START, Bit 1: RESET, Bit 2: IRQ_ENABLE |
-| 0x04    | STATUS    | R   | Bit 0: BUSY, Bit 1: DONE                  |
-| 0x08    | SRC_ADDR  | R/W | Source AXI address                         |
-| 0x0C    | DST_ADDR  | R/W | Destination AXI address                    |
-| 0x10    | LENGTH    | R/W | Transfer length in bytes                   |
+| 0x04    | SRC_ADDR  | R/W | Source AXI address                         |
+| 0x08    | DST_ADDR  | R/W | Destination AXI address                    |
+| 0x0C    | LENGTH    | R/W | Transfer length in bytes                   |
+| 0x10    | STATUS    | R   | Bit 0: BUSY, Bit 1: DONE                  |
 
 ---
 

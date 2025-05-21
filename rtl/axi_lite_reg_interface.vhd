@@ -58,9 +58,17 @@ architecture RTL of axi_lite_reg_interface is
     
     signal state, state_next : state_t;
     signal reg_space, reg_space_next : reg_array_t;
-    signal address_reg, address_next : unsigned(REG_WIDTH-1 downto 0);
+    signal address_reg, address_next : unsigned(REG_WIDTH-1-3 downto 0); -- divided by 8
 
 begin
+
+    -- register space matching
+    start <= reg_space(0)(0);
+    irq_enable <= reg_space(0)(1);
+    src_addr <= reg_space(1);
+    dst_addr <= reg_space(2);
+    length <= reg_space(3);
+    
 
     fsm_reg : process(ACLK, ARESETn)
     begin
@@ -86,17 +94,21 @@ begin
         RVALID <= '0';
         BRESP <= "00";
         RRESP <= "00";
+        reg_space_next(WRITE_REG_COUNT-1 downto 0) <= reg_space(WRITE_REG_COUNT-1 downto 0);
+        reg_space_next(0)(0) <= '0'; -- start bit automatically goes to 0
+        reg_space_next(WRITE_REG_COUNT + READ_REG_COUNT - 1 downto WRITE_REG_COUNT) <= (others => (others => '0')); -- default read regs to 0
+        reg_space_next(WRITE_REG_COUNT)(1 downto 0) <= done & busy; -- except those ones (buffered)
     
         case state is
             when IDLE => 
                 if AWVALID = '1' then -- priority for write, abritrary decision
                     state_next <= WRITE_DATA;
                     AWREADY <= '1';  
-                    address_next <= unsigned(AWADDR);
+                    address_next <= unsigned(AWADDR(REG_WIDTH-1 downto 3)); -- MSb
                 elsif ARVALID = '1' then
                     state_next <= READ_DATA;
                     ARREADY <= '1'; 
-                    address_next <= unsigned(ARADDR);
+                    address_next <= unsigned(ARADDR(REG_WIDTH-1 downto 3)); -- MSb
                 end if;
                 
             when WRITE_DATA =>            

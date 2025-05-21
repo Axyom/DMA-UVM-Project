@@ -21,16 +21,6 @@ This project implements a Direct Memory Access (DMA) engine with an AXI4-Lite re
 - `AXI Master Interfaces`: One for reading, one for writing.
 - No FIFOs or buffering; simple handshaking logic with AXI.
 
-## Register Map
-
-| Address | Name            | Description                        |
-|---------|-----------------|------------------------------------|
-| 0x00    | SRC_ADDR        | Source start address               |
-| 0x04    | DST_ADDR        | Destination start address          |
-| 0x08    | TRANSFER_SIZE   | Number of words to transfer        |
-| 0x0C    | CONTROL         | Bit 0: START                       |
-| 0x10    | STATUS          | Bit 0: BUSY, Bit 1: ERROR (read-only) |
-
 ## Parameters
 
 - `DATA_WIDTH` (default: 32)  

@@ -125,7 +125,7 @@ We put first the writable addresses, then de readable ones to simplify design.
 
 | Address | Name      | R/W | Description                               |
 |---------|-----------|-----|-------------------------------------------|
-| 0x00    | CONTROL   | R/W | Bit 0: START, Bit 1: RESET, Bit 2: IRQ_ENABLE |
+| 0x00    | CONTROL   | R/W | Bit 0: START, Bit 1: IRQ_ENABLE |
 | 0x04    | SRC_ADDR  | R/W | Source AXI address                         |
 | 0x08    | DST_ADDR  | R/W | Destination AXI address                    |
 | 0x0C    | LENGTH    | R/W | Transfer length in bytes                   |

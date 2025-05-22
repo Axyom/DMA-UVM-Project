@@ -14,7 +14,7 @@ interface axi_lite_if #(parameter REG_WIDTH = 32);
     logic [1:0] RRESP;
 endinterface
 
-module tb_axi_lite_reg_interface;
+module axi_lite_reg_interface_tb;
 
     localparam REG_WIDTH = 32;
     localparam WRITE_REG_COUNT = 4;
@@ -62,7 +62,7 @@ module tb_axi_lite_reg_interface;
     // Reset logic
     initial begin
         axi_if.ARESETn = 0;
-        repeat (5) @(posedge axi_if.ACLK);
+        repeat (50) @(posedge axi_if.ACLK);
         axi_if.ARESETn = 1;
     end
 

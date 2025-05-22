@@ -6,4 +6,17 @@ Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4100] "C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/DMA_project.sim/sim_1/behav/xsim/glbl.v" Line 6. Module glbl has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/DMA_project.sim/sim_1/behav/xsim/glbl.v" Line 6. Module glbl has a timescale but at least one module in design doesn't have timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling module xil_defaultlib.axi_lite_if_default
+Compiling architecture rtl of entity xil_defaultlib.axi_lite_reg_interface [axi_lite_reg_interface_default]
+Compiling module xil_defaultlib.axi_lite_reg_interface_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot axi_lite_reg_interface_tb_behav

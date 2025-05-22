@@ -87,6 +87,7 @@ begin
     begin
         -- defaults
         state_next <= state;
+        address_next <= address_reg;
         AWREADY <= '0';
         WREADY <= '0';
         BVALID <= '0';

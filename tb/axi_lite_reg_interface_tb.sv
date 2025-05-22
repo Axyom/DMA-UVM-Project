@@ -68,6 +68,7 @@ module axi_lite_reg_interface_tb;
     initial begin
         axi_if.ARESETn = 0;
         repeat (5) @(posedge axi_if.ACLK);
+        #13; //asynchronous
         axi_if.ARESETn = 1;
     end
 
@@ -116,14 +117,19 @@ module axi_lite_reg_interface_tb;
         integer resp;
     
         wait (axi_if.ARESETn == 1);
+        @(posedge axi_if.ACLK);
         
-        axi_if.AWVALID = 1;
         // Example write
-        write_reg(32'h0, 32'hDEADBEEF, resp);
+        write_reg(32'h4, 32'hDEADBEEF, resp);
+        assert (resp == 2'b00);
         write_reg(32'h4, 32'h12345678, resp);
+        assert (resp == 2'b00);
         write_reg(32'h8, 32'hCAFEBABE, resp, 7, 5);
+        assert (resp == 2'b00);
         write_reg(32'hC, 32'hBAADF00D, resp, 9, 1);
+        assert (resp == 2'b00);
         write_reg(32'h10, 32'hDEADC0DE, resp, 1, 8); // error, write in read-only space
+        assert (resp == 2'b11);
 
         // Add more stimulus as needed
         @(posedge axi_if.ACLK);

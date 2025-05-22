@@ -1,2 +1,2 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/tb/axi_lite_reg_interface_tb.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module axi_lite_reg_interface_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'axi_lite_reg_interface'

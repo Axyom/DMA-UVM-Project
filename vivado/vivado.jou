@@ -23,3 +23,26 @@
 #-----------------------------------------------------------
 start_gui
 open_project {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/DMA_project.xpr}
+launch_simulation
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top tb_axi_lite_reg_interface [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top axi_lite_reg_interface_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+export_ip_user_files -of_objects  [get_files {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}}] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}}
+launch_simulation
+source axi_lite_reg_interface_tb.tcl
+restart
+run 10 us
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1

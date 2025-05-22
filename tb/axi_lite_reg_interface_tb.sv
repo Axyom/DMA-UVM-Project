@@ -19,6 +19,11 @@ module axi_lite_reg_interface_tb;
     localparam REG_WIDTH = 32;
     localparam WRITE_REG_COUNT = 4;
     localparam READ_REG_COUNT = 2;
+    
+    logic busy;
+    logic start;
+    logic done;
+    logic irq_enable;
 
     axi_lite_if #(REG_WIDTH) axi_if();
 
@@ -62,31 +67,45 @@ module axi_lite_reg_interface_tb;
     // Reset logic
     initial begin
         axi_if.ARESETn = 0;
-        repeat (50) @(posedge axi_if.ACLK);
+        repeat (5) @(posedge axi_if.ACLK);
         axi_if.ARESETn = 1;
     end
 
     // Task to write register
-    task automatic write_reg(input int address, input logic [REG_WIDTH-1:0] data);
+    task automatic write_reg
+    (
+        input int address,
+        input logic [REG_WIDTH-1:0] data, 
+        output logic[1:0] bresp,
+        input logic [REG_WIDTH/8-1:0] strb = {(REG_WIDTH/8){1'b1}},
+        input int delay_write = 0, 
+        input int delay_bready = 0
+    );
         begin
-            @(posedge axi_if.ACLK);
-            axi_if.AWADDR = address * 8;
-            axi_if.AWVALID = 1;
+            axi_if.AWADDR = address;
             axi_if.WDATA = data;
-            axi_if.WSTRB = {(REG_WIDTH/8){1'b1}};
-            axi_if.WVALID = 1;
-            axi_if.BREADY = 1;
-
+            axi_if.WSTRB = strb;
+            axi_if.AWVALID = 1;
+            @(posedge axi_if.ACLK);
             // Wait for AWREADY and WREADY
             wait (axi_if.AWREADY == 1);
-            wait (axi_if.WREADY == 1);
-
-            @(posedge axi_if.ACLK);
             axi_if.AWVALID = 0;
+            
+            repeat (delay_write) @(posedge axi_if.ACLK);
+            axi_if.WVALID = 1;
+            
+            
+            wait (axi_if.WREADY == 1);
+            @(posedge axi_if.ACLK);
             axi_if.WVALID = 0;
-
+            
+            repeat (delay_bready) @(posedge axi_if.ACLK);
+            axi_if.BREADY = 1;
+            
             // Wait for BVALID
             wait (axi_if.BVALID == 1);
+            bresp = axi_if.BRESP;
+            
             @(posedge axi_if.ACLK);
             axi_if.BREADY = 0;
         end
@@ -94,16 +113,21 @@ module axi_lite_reg_interface_tb;
 
     // Initial test sequence
     initial begin
+        integer resp;
+    
         wait (axi_if.ARESETn == 1);
         
         axi_if.AWVALID = 1;
         // Example write
-        write_reg(0, 32'hDEADBEEF);
-        write_reg(1, 32'h12345678);
+        write_reg(32'h0, 32'hDEADBEEF, resp);
+        write_reg(32'h4, 32'h12345678, resp);
+        write_reg(32'h8, 32'hCAFEBABE, resp, 7, 5);
+        write_reg(32'hC, 32'hBAADF00D, resp, 9, 1);
+        write_reg(32'h10, 32'hDEADC0DE, resp, 1, 8); // error, write in read-only space
 
         // Add more stimulus as needed
-
-        #1000 $finish;
+        @(posedge axi_if.ACLK);
+        $finish;
     end
 
 endmodule

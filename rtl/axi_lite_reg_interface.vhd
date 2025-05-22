@@ -58,7 +58,7 @@ architecture RTL of axi_lite_reg_interface is
     
     signal state, state_next : state_t;
     signal reg_space, reg_space_next : reg_array_t;
-    signal address_reg, address_next : unsigned(REG_WIDTH-1-3 downto 0); -- divided by 8
+    signal address_reg, address_next : unsigned(REG_WIDTH-1-2 downto 0); -- divided by 8
 
 begin
 
@@ -104,11 +104,11 @@ begin
                 if AWVALID = '1' then -- priority for write, abritrary decision
                     state_next <= WRITE_DATA;
                     AWREADY <= '1';  
-                    address_next <= unsigned(AWADDR(REG_WIDTH-1 downto 3)); -- MSb
+                    address_next <= unsigned(AWADDR(REG_WIDTH-1 downto 2)); -- MSb
                 elsif ARVALID = '1' then
                     state_next <= READ_DATA;
                     ARREADY <= '1'; 
-                    address_next <= unsigned(ARADDR(REG_WIDTH-1 downto 3)); -- MSb
+                    address_next <= unsigned(ARADDR(REG_WIDTH-1 downto 2)); -- MSb
                 end if;
                 
             when WRITE_DATA =>            

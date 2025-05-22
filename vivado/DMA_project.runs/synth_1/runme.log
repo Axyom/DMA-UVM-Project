@@ -1,0 +1,232 @@
+
+*** Running vivado
+    with args -log axi_lite_reg_interface.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source axi_lite_reg_interface.tcl
+
+
+
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Thu May 22 20:34:19 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source axi_lite_reg_interface.tcl -notrace
+Command: synth_design -top axi_lite_reg_interface -part xazu1eg-sbva484-1-i
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xazu1eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xazu1eg'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 13892
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 817.734 ; gain = 477.676
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'axi_lite_reg_interface' [C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd:54]
+INFO: [Synth 8-226] default block is never used [C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd:102]
+INFO: [Synth 8-256] done synthesizing module 'axi_lite_reg_interface' (0#1) [C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd:54]
+WARNING: [Synth 8-3917] design axi_lite_reg_interface has port RVALID driven by constant 0
+WARNING: [Synth 8-7129] Port AWADDR[2] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AWADDR[1] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AWADDR[0] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[2] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[1] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[0] in module axi_lite_reg_interface is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 931.848 ; gain = 591.789
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 931.848 ; gain = 591.789
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xazu1eg-sbva484-1-i
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xazu1eg-sbva484-1-i
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 931.848 ; gain = 591.789
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'axi_lite_reg_interface'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                               00 |                               00
+              write_data |                               01 |                               01
+              write_resp |                               10 |                               10
+               read_data |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'axi_lite_reg_interface'
+WARNING: [Synth 8-327] inferring latch for variable 'address_next_reg' [C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd:82]
+WARNING: [Synth 8-327] inferring latch for variable 'RDATA_reg' [C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_lite_reg_interface.vhd:142]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 931.848 ; gain = 591.789
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 6     
+	               29 Bit    Registers := 1     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 14    
+	   4 Input   32 Bit        Muxes := 7     
+	   2 Input   29 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 24    
+	   2 Input    2 Bit        Muxes := 4     
+	   4 Input    2 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 1     
+	   4 Input    1 Bit        Muxes := 7     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 216 (col length:72)
+BRAMs: 216 (col length: RAMB18 72 RAMB36 36)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design axi_lite_reg_interface has port RVALID driven by constant 0
+WARNING: [Synth 8-7129] Port AWADDR[2] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AWADDR[1] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AWADDR[0] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[2] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[1] in module axi_lite_reg_interface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARADDR[0] in module axi_lite_reg_interface is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:18 . Memory (MB): peak = 1264.285 ; gain = 924.227
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:18 . Memory (MB): peak = 1270.852 ; gain = 930.793
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:06 ; elapsed = 00:00:18 . Memory (MB): peak = 1270.852 ; gain = 930.793
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     2|
+|2     |CARRY8 |     4|
+|3     |LUT1   |     3|
+|4     |LUT2   |    50|
+|5     |LUT3   |    37|
+|6     |LUT4   |    11|
+|7     |LUT5   |    48|
+|8     |LUT6   |   122|
+|9     |FDCE   |   223|
+|10    |LD     |    61|
+|11    |IBUF   |   103|
+|12    |OBUF   |   139|
++------+-------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |   803|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 17 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+Synthesis Optimization Complete : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1423.910 ; gain = 1083.852
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1438.461 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 170 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1494.875 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 166 instances were transformed.
+  BUFG => BUFGCE: 2 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 103 instances
+  LD => LDCE: 61 instances
+
+Synth Design complete | Checksum: dd98b8f3
+INFO: [Common 17-83] Releasing license: Synthesis
+18 Infos, 17 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:23 . Memory (MB): peak = 1494.875 ; gain = 1156.754
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1494.875 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/DMA_project.runs/synth_1/axi_lite_reg_interface.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file axi_lite_reg_interface_utilization_synth.rpt -pb axi_lite_reg_interface_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu May 22 20:34:46 2025...

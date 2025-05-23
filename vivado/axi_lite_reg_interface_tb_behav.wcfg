@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0 ps"></ZoomStartTime>
-      <ZoomEndTime time="5 ps"></ZoomEndTime>
-      <Cursor1Time time="0 ps"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="565.001 ns"></ZoomEndTime>
+      <Cursor1Time time="145.966 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="96"></ValueColumnWidth>
+      <ValueColumnWidth column_width="88"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="9" />
    <wvobject fp_name="group279" type="group">
@@ -37,9 +37,12 @@
          <obj_property name="ObjectShortName">address_next[29:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/axi_lite_reg_interface_tb/dut/reg_space" type="array">
-         <obj_property name="ElementShortName">reg_space[0:5][31:0]</obj_property>
-         <obj_property name="ObjectShortName">reg_space[0:5][31:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
+         <obj_property name="ElementShortName">reg_space[0:4][31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_space[0:4][31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/reg_space_next" type="array">
+         <obj_property name="ElementShortName">reg_space_next[0:4][31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_space_next[0:4][31:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ACLK" type="logic">
@@ -53,7 +56,6 @@
    <wvobject fp_name="group274" type="group">
       <obj_property name="label">AW</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/AWADDR" type="array">
          <obj_property name="ElementShortName">AWADDR[31:0]</obj_property>
          <obj_property name="ObjectShortName">AWADDR[31:0]</obj_property>
@@ -122,6 +124,7 @@
    <wvobject fp_name="group278" type="group">
       <obj_property name="label">R</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/RDATA" type="array">
          <obj_property name="ElementShortName">RDATA[31:0]</obj_property>
          <obj_property name="ObjectShortName">RDATA[31:0]</obj_property>

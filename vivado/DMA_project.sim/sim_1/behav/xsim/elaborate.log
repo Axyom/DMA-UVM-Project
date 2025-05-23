@@ -16,7 +16,7 @@ Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
 Compiling module xil_defaultlib.axi_lite_if_default
-Compiling architecture rtl of entity xil_defaultlib.axi_lite_reg_interface [axi_lite_reg_interface_default]
+Compiling architecture rtl of entity xil_defaultlib.axi_lite_reg_interface [\axi_lite_reg_interface(read_reg...]
 Compiling module xil_defaultlib.axi_lite_reg_interface_tb
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot axi_lite_reg_interface_tb_behav

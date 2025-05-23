@@ -93,3 +93,33 @@ launch_simulation
 open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
 source axi_lite_reg_interface_tb.tcl
 save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+restart
+run all
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+restart
+run all
+restart
+run all
+restart
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl

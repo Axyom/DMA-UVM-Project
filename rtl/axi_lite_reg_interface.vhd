@@ -93,6 +93,7 @@ begin
         BVALID <= '0';
         ARREADY <= '0';
         RVALID <= '0';
+        RDATA <= (others => '0');
         BRESP <= "00";
         RRESP <= "00";
         reg_space_next(0 to WRITE_REG_COUNT-1) <= reg_space(0 to WRITE_REG_COUNT-1);
@@ -138,8 +139,9 @@ begin
                 end if;
                 
             when READ_DATA =>
+                RVALID <= '1';
                 
-                if to_integer(address_reg) > WRITE_REG_COUNT and to_integer(address_reg) < WRITE_REG_COUNT + READ_REG_COUNT then
+                if to_integer(address_reg) < WRITE_REG_COUNT + READ_REG_COUNT then
                     RDATA <= reg_space(to_integer(address_reg));
                 else -- index error
                     RRESP <= "11";

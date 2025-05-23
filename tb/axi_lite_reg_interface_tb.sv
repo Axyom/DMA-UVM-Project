@@ -18,7 +18,7 @@ module axi_lite_reg_interface_tb;
 
     localparam REG_WIDTH = 32;
     localparam WRITE_REG_COUNT = 4;
-    localparam READ_REG_COUNT = 2;
+    localparam READ_REG_COUNT = 1;
     
     logic busy;
     logic start;
@@ -67,15 +67,14 @@ module axi_lite_reg_interface_tb;
     // Reset logic
     initial begin
         axi_if.ARESETn = 0;
-        repeat (5) @(posedge axi_if.ACLK);
-        #13; //asynchronous
+        repeat (2) @(posedge axi_if.ACLK);
         axi_if.ARESETn = 1;
     end
 
     // Task to write register
     task automatic write_reg
     (
-        input int address,
+        input logic [REG_WIDTH-1:0] address,
         input logic [REG_WIDTH-1:0] data, 
         output logic[1:0] bresp,
         input logic [REG_WIDTH/8-1:0] strb = {(REG_WIDTH/8){1'b1}},
@@ -112,24 +111,61 @@ module axi_lite_reg_interface_tb;
         end
     endtask
 
+    // Task to read a register
+    task automatic read_reg
+    (
+        input logic [REG_WIDTH-1:0] address, 
+        output logic [REG_WIDTH-1:0] data, 
+        output logic [1:0] rresp, 
+        input int delay_rready=0
+    );
+        axi_if.ARVALID = 1;
+        axi_if.RREADY = 0;
+        axi_if.ARADDR = address;
+        @(posedge axi_if.ACLK);
+        
+        wait(axi_if.ARREADY);
+        axi_if.ARVALID = 0;
+        
+        wait(axi_if.RVALID == 1);
+        data = axi_if.RDATA;
+        rresp = axi_if.RRESP;
+        
+        repeat(delay_rready) @(posedge axi_if.ACLK);
+        
+        axi_if.RREADY = 1;
+        @(posedge axi_if.ACLK);
+        axi_if.RREADY = 0;
+    endtask
     // Initial test sequence
     initial begin
-        integer resp;
-    
+        integer bresp, rdata, rresp;
+        
         wait (axi_if.ARESETn == 1);
         @(posedge axi_if.ACLK);
         
         // Example write
-        write_reg(32'h4, 32'hDEADBEEF, resp);
-        assert (resp == 2'b00);
-        write_reg(32'h4, 32'h12345678, resp);
-        assert (resp == 2'b00);
-        write_reg(32'h8, 32'hCAFEBABE, resp, 7, 5);
-        assert (resp == 2'b00);
-        write_reg(32'hC, 32'hBAADF00D, resp, 9, 1);
-        assert (resp == 2'b00);
-        write_reg(32'h10, 32'hDEADC0DE, resp, 1, 8); // error, write in read-only space
-        assert (resp == 2'b11);
+        write_reg(32'h0, 32'hDEADBEEF, bresp);
+        assert (bresp == 2'b00);
+        write_reg(32'h4, 32'h12345678, bresp, 4'h7);
+        assert (bresp == 2'b00);
+        write_reg(32'h8, 32'hCAFEBABE, bresp, 4'hf, 8, 1);
+        assert (bresp == 2'b00);
+        write_reg(32'hC, 32'hBAADF00D, bresp, 4'hf, 1, 3);
+        assert (bresp == 2'b00);
+        write_reg(32'h10, 32'hDEADC0DE, bresp, 4'hf, 10, 5); // error, write in read-only space
+        assert (bresp == 2'b11);
+        
+        read_reg(32'h0, rdata, rresp);
+        assert (rdata == 32'hDEADBEEE);
+        read_reg(32'h4, rdata, rresp);
+        assert (rdata == 32'h00345678);
+        read_reg(32'h8, rdata, rresp);
+        assert (rdata == 32'hCAFEBABE);
+        read_reg(32'hC, rdata, rresp);
+        assert (rdata == 32'hBAADF00D);
+        read_reg(32'h20, rdata, rresp); // error
+        assert (rresp == 2'b11);
 
         // Add more stimulus as needed
         @(posedge axi_if.ACLK);

@@ -11,9 +11,9 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="477.394 ns"></ZoomStartTime>
-      <ZoomEndTime time="609.767 ns"></ZoomEndTime>
-      <Cursor1Time time="565.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="585.001 ns"></ZoomEndTime>
+      <Cursor1Time time="307.445 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="266"></NameColumnWidth>
@@ -158,14 +158,6 @@
          <obj_property name="ElementShortName">irq_enable</obj_property>
          <obj_property name="ObjectShortName">irq_enable</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/busy" type="logic">
-         <obj_property name="ElementShortName">busy</obj_property>
-         <obj_property name="ObjectShortName">busy</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/done" type="logic">
-         <obj_property name="ElementShortName">done</obj_property>
-         <obj_property name="ObjectShortName">done</obj_property>
-      </wvobject>
       <wvobject fp_name="/axi_lite_reg_interface_tb/dut/src_addr" type="array">
          <obj_property name="ElementShortName">src_addr[31:0]</obj_property>
          <obj_property name="ObjectShortName">src_addr[31:0]</obj_property>
@@ -177,6 +169,14 @@
       <wvobject fp_name="/axi_lite_reg_interface_tb/dut/length" type="array">
          <obj_property name="ElementShortName">length[31:0]</obj_property>
          <obj_property name="ObjectShortName">length[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/busy" type="logic">
+         <obj_property name="ElementShortName">busy</obj_property>
+         <obj_property name="ObjectShortName">busy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/done" type="logic">
+         <obj_property name="ElementShortName">done</obj_property>
+         <obj_property name="ObjectShortName">done</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

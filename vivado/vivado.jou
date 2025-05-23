@@ -192,3 +192,30 @@ close_sim
 launch_simulation
 open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
 source axi_lite_reg_interface_tb.tcl
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+restart
+run 10 us
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+close_sim
+launch_simulation
+open_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+source axi_lite_reg_interface_tb.tcl
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+save_wave_config {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/vivado/axi_lite_reg_interface_tb_behav.wcfg}
+close_sim
+close [ open {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/dma_engine.vhd} w ]
+add_files {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/dma_engine.vhd}}
+close [ open {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_write_master_engine.vhd} w ]
+add_files {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_write_master_engine.vhd}}
+close [ open {C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_read_master_engine.vhd} w ]
+add_files {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/axi_read_master_engine.vhd}}
+add_files -norecurse {{C:/Users/Axyom/Documents/Projets Pro/DMA-UVM-Project/rtl/dma_controller.vhd}}

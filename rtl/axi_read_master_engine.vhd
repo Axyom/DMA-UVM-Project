@@ -41,8 +41,8 @@ entity axi_read_master_engine is
     
     -- Status
     busy          : out std_logic;
-    done          : out std_logic;
-    error         : out std_logic
+    done          : out std_logic
+    --error         : out std_logic
   );
 end entity;
 
@@ -51,15 +51,17 @@ architecture rtl of axi_read_master_engine is
     type State_t is (IDLE, SEND_ADDR, RECEIVE_DATA);
     signal state, state_next : State_t;
 
-    signal burst_count, burst_count_next, addr, addr_next : std_logic_vector(REG_WIDTH-1 downto 0);
+    signal addr, addr_next : std_logic_vector(REG_WIDTH-1 downto 0);
+    signal burst_count, burst_count_next : std_logic_vector(7 downto 0);
 
 begin
     M_AXI_ARSIZE <= std_logic_vector( to_unsigned(integer(ceil(log2(real(REG_WIDTH/8)))), 3) );
     M_AXI_ARBURST <= "01"; -- incremental burst always
+    data_out <= M_AXI_RDATA;
 
     fsm_reg : process (ACLK, ARESETN)
     begin
-        if ARESETN = '1' then
+        if ARESETN = '0' then
             state <= IDLE;
             burst_count <= (others => '0');
             addr <= (others => '0');
@@ -81,8 +83,8 @@ begin
         M_AXI_ARADDR <= (others => '0');
         M_AXI_ARLEN <= (others => '0');
         M_AXI_ARVALID <= '0';
-
         M_AXI_RREADY <= '0';
+        data_valid <= '0';
 
         case state is
             when IDLE =>
@@ -107,7 +109,6 @@ begin
 
                 M_AXI_RREADY <= receive_data_ready;
                 data_valid <= M_AXI_RVALID;
-                data_out <= M_AXI_RDATA;
 
                 if M_AXI_RLAST = '1' and receive_data_ready = '1' then
                     state_next <= IDLE;

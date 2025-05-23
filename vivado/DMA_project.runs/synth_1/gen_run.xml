@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xazu1eg-sbva484-1-i" LaunchTime="1747938857">
-  <File Type="PA-TCL" Name="axi_lite_reg_interface.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="axi_lite_reg_interface_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="axi_lite_reg_interface_reports.tcl"/>
-  <File Type="RDS-RDS" Name="axi_lite_reg_interface.vds"/>
   <File Type="RDS-UTIL" Name="axi_lite_reg_interface_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="axi_lite_reg_interface_utilization_synth.pb"/>
+  <File Type="PA-TCL" Name="axi_lite_reg_interface.tcl"/>
+  <File Type="RDS-RDS" Name="axi_lite_reg_interface.vds"/>
   <File Type="RDS-DCP" Name="axi_lite_reg_interface.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="axi_lite_reg_interface_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="axi_lite_reg_interface_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../rtl/axi_lite_reg_interface.vhd">

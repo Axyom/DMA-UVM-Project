@@ -3,180 +3,132 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="axi_lite_reg_interface_tb_behav.wdb" id="1">
+      <db_ref path="axi_read_master_engine_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="axi_lite_reg_interface_tb" />
+            <top_module name="\$unit_axi_master_read_engine_tb_sv " />
+            <top_module name="axi_read_master_engine_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="585.001 ns"></ZoomEndTime>
-      <Cursor1Time time="307.445 ns"></Cursor1Time>
+      <ZoomEndTime time="24.224 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="80"></ValueColumnWidth>
+      <NameColumnWidth column_width="240"></NameColumnWidth>
+      <ValueColumnWidth column_width="147"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="10" />
-   <wvobject fp_name="group279" type="group">
-      <obj_property name="label">Internal</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/state" type="other">
-         <obj_property name="ElementShortName">state</obj_property>
-         <obj_property name="ObjectShortName">state</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/address_reg" type="array">
-         <obj_property name="ElementShortName">address_reg[29:0]</obj_property>
-         <obj_property name="ObjectShortName">address_reg[29:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/address_next" type="array">
-         <obj_property name="ElementShortName">address_next[29:0]</obj_property>
-         <obj_property name="ObjectShortName">address_next[29:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/reg_space" type="array">
-         <obj_property name="ElementShortName">reg_space[0:4][31:0]</obj_property>
-         <obj_property name="ObjectShortName">reg_space[0:4][31:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/reg_space_next" type="array">
-         <obj_property name="ElementShortName">reg_space_next[0:4][31:0]</obj_property>
-         <obj_property name="ObjectShortName">reg_space_next[0:4][31:0]</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ACLK" type="logic">
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/axi_read_master_engine_tb/dut/ACLK" type="logic">
       <obj_property name="ElementShortName">ACLK</obj_property>
       <obj_property name="ObjectShortName">ACLK</obj_property>
    </wvobject>
-   <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ARESETn" type="logic">
-      <obj_property name="ElementShortName">ARESETn</obj_property>
-      <obj_property name="ObjectShortName">ARESETn</obj_property>
+   <wvobject fp_name="/axi_read_master_engine_tb/dut/ARESETN" type="logic">
+      <obj_property name="ElementShortName">ARESETN</obj_property>
+      <obj_property name="ObjectShortName">ARESETN</obj_property>
    </wvobject>
-   <wvobject fp_name="group274" type="group">
-      <obj_property name="label">AW</obj_property>
+   <wvobject fp_name="/axi_read_master_engine_tb/dut/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_read_master_engine_tb/dut/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/axi_read_master_engine_tb/dut/state_next" type="other">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="group98" type="group">
+      <obj_property name="label">Control Signals</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/AWADDR" type="array">
-         <obj_property name="ElementShortName">AWADDR[31:0]</obj_property>
-         <obj_property name="ObjectShortName">AWADDR[31:0]</obj_property>
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/read_addr" type="array">
+         <obj_property name="ElementShortName">read_addr[31:0]</obj_property>
+         <obj_property name="ObjectShortName">read_addr[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/AWVALID" type="logic">
-         <obj_property name="ElementShortName">AWVALID</obj_property>
-         <obj_property name="ObjectShortName">AWVALID</obj_property>
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/read_length" type="array">
+         <obj_property name="ElementShortName">read_length[7:0]</obj_property>
+         <obj_property name="ObjectShortName">read_length[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/AWREADY" type="logic">
-         <obj_property name="ElementShortName">AWREADY</obj_property>
-         <obj_property name="ObjectShortName">AWREADY</obj_property>
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/data_out" type="array">
+         <obj_property name="ElementShortName">data_out[31:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
       </wvobject>
-   </wvobject>
-   <wvobject fp_name="group275" type="group">
-      <obj_property name="label">W</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/WDATA" type="array">
-         <obj_property name="ElementShortName">WDATA[31:0]</obj_property>
-         <obj_property name="ObjectShortName">WDATA[31:0]</obj_property>
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/data_valid" type="logic">
+         <obj_property name="ElementShortName">data_valid</obj_property>
+         <obj_property name="ObjectShortName">data_valid</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/WSTRB" type="array">
-         <obj_property name="ElementShortName">WSTRB[3:0]</obj_property>
-         <obj_property name="ObjectShortName">WSTRB[3:0]</obj_property>
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/receive_data_ready" type="logic">
+         <obj_property name="ElementShortName">receive_data_ready</obj_property>
+         <obj_property name="ObjectShortName">receive_data_ready</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/WVALID" type="logic">
-         <obj_property name="ElementShortName">WVALID</obj_property>
-         <obj_property name="ObjectShortName">WVALID</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/WREADY" type="logic">
-         <obj_property name="ElementShortName">WREADY</obj_property>
-         <obj_property name="ObjectShortName">WREADY</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject fp_name="group276" type="group">
-      <obj_property name="label">B</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/BVALID" type="logic">
-         <obj_property name="ElementShortName">BVALID</obj_property>
-         <obj_property name="ObjectShortName">BVALID</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/BREADY" type="logic">
-         <obj_property name="ElementShortName">BREADY</obj_property>
-         <obj_property name="ObjectShortName">BREADY</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/BRESP" type="array">
-         <obj_property name="ElementShortName">BRESP[1:0]</obj_property>
-         <obj_property name="ObjectShortName">BRESP[1:0]</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject fp_name="group277" type="group">
-      <obj_property name="label">AR</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ARADDR" type="array">
-         <obj_property name="ElementShortName">ARADDR[31:0]</obj_property>
-         <obj_property name="ObjectShortName">ARADDR[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ARVALID" type="logic">
-         <obj_property name="ElementShortName">ARVALID</obj_property>
-         <obj_property name="ObjectShortName">ARVALID</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/ARREADY" type="logic">
-         <obj_property name="ElementShortName">ARREADY</obj_property>
-         <obj_property name="ObjectShortName">ARREADY</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject fp_name="group278" type="group">
-      <obj_property name="label">R</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/RDATA" type="array">
-         <obj_property name="ElementShortName">RDATA[31:0]</obj_property>
-         <obj_property name="ObjectShortName">RDATA[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/RVALID" type="logic">
-         <obj_property name="ElementShortName">RVALID</obj_property>
-         <obj_property name="ObjectShortName">RVALID</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/RREADY" type="logic">
-         <obj_property name="ElementShortName">RREADY</obj_property>
-         <obj_property name="ObjectShortName">RREADY</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/RRESP" type="array">
-         <obj_property name="ElementShortName">RRESP[1:0]</obj_property>
-         <obj_property name="ObjectShortName">RRESP[1:0]</obj_property>
-      </wvobject>
-   </wvobject>
-   <wvobject fp_name="/axi_lite_reg_interface_tb/axi_if/REG_WIDTH" type="array">
-      <obj_property name="ElementShortName">REG_WIDTH[31:0]</obj_property>
-      <obj_property name="ObjectShortName">REG_WIDTH[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="group1027" type="group">
-      <obj_property name="label">Parsed signals</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/start" type="logic">
-         <obj_property name="ElementShortName">start</obj_property>
-         <obj_property name="ObjectShortName">start</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/irq_enable" type="logic">
-         <obj_property name="ElementShortName">irq_enable</obj_property>
-         <obj_property name="ObjectShortName">irq_enable</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/src_addr" type="array">
-         <obj_property name="ElementShortName">src_addr[31:0]</obj_property>
-         <obj_property name="ObjectShortName">src_addr[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/dst_addr" type="array">
-         <obj_property name="ElementShortName">dst_addr[31:0]</obj_property>
-         <obj_property name="ObjectShortName">dst_addr[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/length" type="array">
-         <obj_property name="ElementShortName">length[31:0]</obj_property>
-         <obj_property name="ObjectShortName">length[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/busy" type="logic">
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/busy" type="logic">
          <obj_property name="ElementShortName">busy</obj_property>
          <obj_property name="ObjectShortName">busy</obj_property>
       </wvobject>
-      <wvobject fp_name="/axi_lite_reg_interface_tb/dut/done" type="logic">
+      <wvobject fp_name="/axi_read_master_engine_tb/dut/done" type="logic">
          <obj_property name="ElementShortName">done</obj_property>
          <obj_property name="ObjectShortName">done</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group112" type="group">
+      <obj_property name="label">AXI4</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group113" type="group">
+         <obj_property name="label">AR</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARADDR" type="array">
+            <obj_property name="ElementShortName">ARADDR[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ARADDR[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARBURST" type="array">
+            <obj_property name="ElementShortName">ARBURST[1:0]</obj_property>
+            <obj_property name="ObjectShortName">ARBURST[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARLEN" type="array">
+            <obj_property name="ElementShortName">ARLEN[7:0]</obj_property>
+            <obj_property name="ObjectShortName">ARLEN[7:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARREADY" type="logic">
+            <obj_property name="ElementShortName">ARREADY</obj_property>
+            <obj_property name="ObjectShortName">ARREADY</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARSIZE" type="array">
+            <obj_property name="ElementShortName">ARSIZE[2:0]</obj_property>
+            <obj_property name="ObjectShortName">ARSIZE[2:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/ARVALID" type="logic">
+            <obj_property name="ElementShortName">ARVALID</obj_property>
+            <obj_property name="ObjectShortName">ARVALID</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group114" type="group">
+         <obj_property name="label">R</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/RDATA" type="array">
+            <obj_property name="ElementShortName">RDATA[31:0]</obj_property>
+            <obj_property name="ObjectShortName">RDATA[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/RLAST" type="logic">
+            <obj_property name="ElementShortName">RLAST</obj_property>
+            <obj_property name="ObjectShortName">RLAST</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/RREADY" type="logic">
+            <obj_property name="ElementShortName">RREADY</obj_property>
+            <obj_property name="ObjectShortName">RREADY</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/RRESP" type="array">
+            <obj_property name="ElementShortName">RRESP[1:0]</obj_property>
+            <obj_property name="ObjectShortName">RRESP[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/axi_read_master_engine_tb/axi_if/RVALID" type="logic">
+            <obj_property name="ElementShortName">RVALID</obj_property>
+            <obj_property name="ObjectShortName">RVALID</obj_property>
+         </wvobject>
       </wvobject>
    </wvobject>
 </wave_config>

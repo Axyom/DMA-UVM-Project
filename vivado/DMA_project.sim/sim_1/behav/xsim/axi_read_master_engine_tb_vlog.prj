@@ -1,6 +1,7 @@
 # compile verilog/system verilog design source files
 sv xil_defaultlib  \
 "../../../../../tb/axi_lite_reg_interface_tb.sv" \
+"../../../../../tb/axi_master_read_engine_tb.sv" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

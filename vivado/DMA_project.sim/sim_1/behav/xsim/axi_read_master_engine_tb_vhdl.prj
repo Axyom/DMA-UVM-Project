@@ -4,6 +4,11 @@ vhdl2008 xil_defaultlib  \
 
 vhdl xil_defaultlib  \
 "../../../../../rtl/dma_controller.vhd" \
+"../../../../../rtl/dma_engine.vhd" \
+"../../../../../rtl/axi_write_master_engine.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../../rtl/axi_read_master_engine.vhd" \
 
 # Do not sort compile order
 nosort

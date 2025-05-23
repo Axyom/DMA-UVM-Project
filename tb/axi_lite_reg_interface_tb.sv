@@ -53,8 +53,8 @@ module axi_lite_reg_interface_tb;
         .RRESP(axi_if.RRESP),
         .start(),
         .irq_enable(),
-        .busy(1'b0),
-        .done(1'b0),
+        .busy(busy),
+        .done(done),
         .src_addr(),
         .dst_addr(),
         .length()
@@ -81,34 +81,32 @@ module axi_lite_reg_interface_tb;
         input int delay_write = 0, 
         input int delay_bready = 0
     );
-        begin
-            axi_if.AWADDR = address;
-            axi_if.WDATA = data;
-            axi_if.WSTRB = strb;
-            axi_if.AWVALID = 1;
-            @(posedge axi_if.ACLK);
-            // Wait for AWREADY and WREADY
-            wait (axi_if.AWREADY == 1);
-            axi_if.AWVALID = 0;
-            
-            repeat (delay_write) @(posedge axi_if.ACLK);
-            axi_if.WVALID = 1;
-            
-            
-            wait (axi_if.WREADY == 1);
-            @(posedge axi_if.ACLK);
-            axi_if.WVALID = 0;
-            
-            repeat (delay_bready) @(posedge axi_if.ACLK);
-            axi_if.BREADY = 1;
-            
-            // Wait for BVALID
-            wait (axi_if.BVALID == 1);
-            bresp = axi_if.BRESP;
-            
-            @(posedge axi_if.ACLK);
-            axi_if.BREADY = 0;
-        end
+        axi_if.AWADDR = address;
+        axi_if.WDATA = data;
+        axi_if.WSTRB = strb;
+        axi_if.AWVALID = 1;
+        @(posedge axi_if.ACLK);
+        // Wait for AWREADY and WREADY
+        wait (axi_if.AWREADY == 1);
+        axi_if.AWVALID = 0;
+        
+        repeat (delay_write) @(posedge axi_if.ACLK);
+        axi_if.WVALID = 1;
+        
+        
+        wait (axi_if.WREADY == 1);
+        @(posedge axi_if.ACLK);
+        axi_if.WVALID = 0;
+        
+        repeat (delay_bready) @(posedge axi_if.ACLK);
+        axi_if.BREADY = 1;
+        
+        // Wait for BVALID
+        wait (axi_if.BVALID == 1);
+        bresp = axi_if.BRESP;
+        
+        @(posedge axi_if.ACLK);
+        axi_if.BREADY = 0;
     endtask
 
     // Task to read a register
@@ -141,6 +139,9 @@ module axi_lite_reg_interface_tb;
     initial begin
         integer bresp, rdata, rresp;
         
+        done = 0;
+        busy = 0;
+        
         wait (axi_if.ARESETn == 1);
         @(posedge axi_if.ACLK);
         
@@ -158,14 +159,25 @@ module axi_lite_reg_interface_tb;
         
         read_reg(32'h0, rdata, rresp);
         assert (rdata == 32'hDEADBEEE);
+        assert (rresp == 2'b00);
         read_reg(32'h4, rdata, rresp);
         assert (rdata == 32'h00345678);
+        assert (rresp == 2'b00);
         read_reg(32'h8, rdata, rresp);
         assert (rdata == 32'hCAFEBABE);
+        assert (rresp == 2'b00);
         read_reg(32'hC, rdata, rresp);
         assert (rdata == 32'hBAADF00D);
+        assert (rresp == 2'b00);
         read_reg(32'h20, rdata, rresp); // error
         assert (rresp == 2'b11);
+        
+        done = 1;
+        busy = 1;
+        
+        read_reg(32'h10, rdata, rresp); // error
+        assert (rdata == 32'h00000003);
+        assert (rresp == 2'b00);
 
         // Add more stimulus as needed
         @(posedge axi_if.ACLK);

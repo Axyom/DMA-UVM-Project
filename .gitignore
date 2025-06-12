@@ -3,3 +3,10 @@
 *.ini
 transcript
 *.wlf
+scripts/sim_build/top/_info
+
+scripts/results.xml
+
+*.pyc
+*.cf
+*.vvp
